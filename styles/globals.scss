@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+
+html,
+body {
+  font-family: 'DM Sans', sans-serif;
+  @apply text-primary bg-[#EDEDED] overflow-x-hidden;
+}
+
+.container {
+  @apply mx-auto px-5 md:px-10 w-full;
+}
+
+.boldparagraph {
+  @apply md:text-base text-sm font-bold;
+}
+
+.genrespan {
+  @apply border  font-bold rounded-3xl py-3 md:text-base text-xs px-5 md:px-8 cursor-pointer hover:opacity-80;
+
+  &.blue {
+    @apply bg-[#F3F8FC] border-[#c4d1db];
+  }
+  &.purple {
+    @apply bg-[#F1F1FC] border-[#c4c4dd];
+  }
+  &.yellow {
+    @apply bg-[#FAFAF3] border-[#e2e2c7];
+  }
+  &.teal {
+    @apply bg-[#E9FBF8] border-[#cce8e3];
+  }
+  &.pink {
+    @apply bg-[#FDF4F8] border-[#eccfdc];
+  }
+  &.beige {
+    @apply bg-[#F5F3F2] border-[#eddbd2];
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
