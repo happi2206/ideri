@@ -44,13 +44,13 @@ const Dropdown = ({ values, getValue }: Props) => {
         {dropdown && (
           <div
             id="dropdown"
-            className="absolute z-10 w-40 shadow bg-light md:w-44"
+            className="absolute z-10 w-40 border rounded shadow-lg border-primary bg-light md:w-44"
           >
             <ul className="text-sm text-gray-700 ">
               {values.map((value: string, i: React.Key) => (
                 <div key={i}>
                   <li
-                    className="p-3 text-xs capitalize cursor-pointer hover:bg-gray-200 "
+                    className="p-3 text-xs capitalize rounded cursor-pointer hover:bg-gray-200 "
                     onClick={() => {
                       getValue(value);
                       setDropdown(false);

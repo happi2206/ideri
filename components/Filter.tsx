@@ -7,9 +7,7 @@ const Filter = () => {
     <>
       <SearchInput />
 
-      <div className="border-b border-gray-300"></div>
-
-      <div className="flex justify-end py-8">
+      <div className="flex justify-end py-4 md:py-8">
         <Dropdown
           values={['Title', 'Artist']}
           getValue={() => console.log('object')}

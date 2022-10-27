@@ -9,7 +9,7 @@ const Button = ({ children, isSearch }: Props) => {
   return (
     <button
       className={`${
-        isSearch ? 'px-10 py-4' : 'p-4'
+        isSearch ? 'px-12 py-3' : 'p-4'
       } bg-dark font-bold md:text-base text-sm text-light hover:opacity-80`}
     >
       {children}

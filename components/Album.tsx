@@ -1,4 +1,5 @@
 import Image, { StaticImageData } from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 interface Props {
@@ -9,16 +10,21 @@ interface Props {
 
 const Album = ({ image, title, artist }: Props) => {
   return (
-    <div className="cursor-pointer">
-      <Image src={image} alt={`the album cover of ${title}`} />
+    <Link
+      href={`albumdetail/${title + '-' + artist}`}
+      className="cursor-pointer"
+    >
+      <div className="cursor-pointer">
+        <Image src={image} alt={`the album cover of ${title}`} />
 
-      <div className="flex flex-col items-center">
-        <h4 className="font-bold text-sm md:text-lg">{title}</h4>
-        <p className="font-light text-xs md:text-base text-gray-400">
-          {artist}
-        </p>
+        <div className="flex flex-col items-center">
+          <h4 className="text-sm font-bold md:text-lg">{title}</h4>
+          <p className="text-xs font-light text-gray-400 md:text-base">
+            {artist}
+          </p>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
