@@ -2,7 +2,7 @@ import React from 'react';
 
 const Categories = () => {
   return (
-    <div className="py-5 md:py-10 space-x-5 h-full w-full overflow-x-scroll no-scrollbar">
+    <div className="w-full h-full py-5 space-x-5 overflow-x-scroll md:py-10 no-scrollbar">
       <span className="genrespan blue">Abstract</span>
       <span className="genrespan purple">Experimental</span>
       <span className="genrespan yellow">Photography</span>

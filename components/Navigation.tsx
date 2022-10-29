@@ -1,10 +1,12 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 import Button from './Base/Button';
 
 const Navigation = () => {
+  const route = useRouter();
   return (
-    <nav className="z-10 flex items-center w-full py-4  flex-nowrap bg-light">
+    <nav className="z-10 flex items-center w-full py-4 flex-nowrap bg-light">
       <div className="container flex items-center">
         <div className="flex items-center grow">
           <Link href="/">
@@ -14,7 +16,12 @@ const Navigation = () => {
         <div className="sp">
           <div className="flex items-center space-x-10">
             <p className="text-sm md:text-base">About</p>
-            <Button>Upload album cover</Button>
+            <Button
+              onClick={() => route.push('/uploadalbum')}
+              disabled={route.route === '/uploadalbum'}
+            >
+              Upload album cover
+            </Button>
           </div>
         </div>
       </div>

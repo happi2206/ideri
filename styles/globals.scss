@@ -72,3 +72,10 @@ body {
     }
   }
 }
+
+.reactselect {
+  @apply w-full px-3 text-xs text-customgray600 bg-customgray200 focus:outline-none py-1 border border-primary;
+  div {
+    @apply bg-customgray200 border-none focus:outline-none focus:border-none;
+  }
+}
