@@ -1,14 +1,15 @@
 import React from 'react';
+import SingleCategory from './SingleCategory';
 
 const Categories = () => {
   return (
     <div className="w-full h-full py-5 space-x-5 overflow-x-scroll md:py-10 no-scrollbar">
-      <span className="genrespan blue">Abstract</span>
-      <span className="genrespan purple">Experimental</span>
-      <span className="genrespan yellow">Photography</span>
-      <span className="genrespan teal">Ethereal</span>
-      <span className="genrespan pink">Futuristic</span>
-      <span className="genrespan beige">Minimalistic</span>
+      <SingleCategory text="Abstract" color="blue" />
+      <SingleCategory text="Experimental" color="purple" />
+      <SingleCategory text="Photography" color="yellow" />
+      <SingleCategory text="Ethereal" color="teal" />
+      <SingleCategory text="Futuristic" color="pink" />
+      <SingleCategory text="Minimalistic" color="beige" />
     </div>
   );
 };

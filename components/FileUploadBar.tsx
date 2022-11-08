@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react';
 import React, { useEffect, useState } from 'react';
 
-const FileUploadBar = () => {
+const FileUploadBar = ({ title }: { title: string }) => {
   const [progress, setProgress] = useState(0);
   const [showCoverTitle, setShowCoverTitle] = useState(false);
   useEffect(() => {
@@ -17,7 +17,13 @@ const FileUploadBar = () => {
   return (
     <div className="p-3 bg-gray-200 border border-customgray200">
       {showCoverTitle ? (
-        'hey'
+        <div className="flex items-center justify-between">
+          <p className="text-xs font-medium">{title}</p>
+
+          <span className="text-red-500 cursor-pointer">
+            <Icon icon="ep:delete" />
+          </span>
+        </div>
       ) : (
         <div>
           <p className="text-xs font-medium">File uploading...</p>

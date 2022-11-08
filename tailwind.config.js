@@ -13,6 +13,8 @@ module.exports = {
         customgray800: '#6D6B6B',
         customgray600: '#919090',
         customgray200: '#DADADA',
+        lighttext: '#7A565B',
+        darktext: '#FED8DD',
       },
     },
   },

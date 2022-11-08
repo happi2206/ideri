@@ -2,11 +2,12 @@ import { Icon } from '@iconify/react';
 import React, { useState } from 'react';
 import FileUploadBar from './FileUploadBar';
 
-const UploadInput = () => {
+const UploadInput = ({ getFile }: { getFile: any }) => {
   const inputFileRef = React.useRef<HTMLInputElement | null>(null);
   const dragZoneRef = React.useRef<HTMLDivElement | null>(null);
   const [dragActive, setDragActive] = useState(false);
-
+  const [showFileUploadBar, setShowFileUploadBar] = useState(false);
+  const [filename, setFileName] = useState('');
   const handleDrag = (e: {
     preventDefault: () => void;
     stopPropagation: () => void;
@@ -35,7 +36,12 @@ const UploadInput = () => {
     inputFileRef.current.click();
   };
   const onChange = (event: FileList | null) => {
-    console.log('hey', event);
+    if (event === null) return;
+    const file = event[0];
+
+    setFileName(file?.name);
+    setShowFileUploadBar(true);
+    getFile(file);
   };
   return (
     <div className="space-y-2">
@@ -53,8 +59,11 @@ const UploadInput = () => {
             <Icon icon="akar-icons:image" width={40} />
           </span>
           <p className="text-sm font-medium text-center">
-            Drop album cover here, or{' '}
-            <span className="underline cursor-pointer" onClick={getInputRef}>
+            Drop album cover here, or
+            <span
+              className="pl-1 underline cursor-pointer"
+              onClick={getInputRef}
+            >
               browse
             </span>
           </p>
@@ -73,7 +82,9 @@ const UploadInput = () => {
           ></div>
         )}
       </div>
-      <FileUploadBar />
+
+      {showFileUploadBar && <FileUploadBar title={filename} />}
+
       <input
         hidden
         ref={inputFileRef}

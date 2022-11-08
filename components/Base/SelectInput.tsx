@@ -1,7 +1,17 @@
 import React, { useId } from 'react';
-import Select from 'react-select';
+import Select, { ActionMeta, MultiValue } from 'react-select';
 interface Props {
   label?: string;
+  onChange?: (
+    newValue: MultiValue<{
+      value: string;
+      label: string;
+    }>,
+    actionMeta: ActionMeta<{
+      value: string;
+      label: string;
+    }>
+  ) => void;
 }
 const options = [
   { value: 'chocolate', label: 'Chocolate' },
@@ -18,7 +28,7 @@ const style = {
     },
   }),
 };
-const SelectInput = ({ label }: Props) => {
+const SelectInput = ({ label, onChange }: Props) => {
   return (
     <div className="space-y-2">
       <label className="mb-2 text-sm md:text-base text-primary">{label}</label>
@@ -28,6 +38,7 @@ const SelectInput = ({ label }: Props) => {
         styles={style}
         isMulti
         className="reactselect"
+        onChange={onChange}
       />
     </div>
   );
