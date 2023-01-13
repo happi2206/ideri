@@ -14,9 +14,12 @@ interface Props {
   ) => void;
 }
 const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
+  { value: 'Pop', label: 'Pop' },
+  { value: 'Lofi', label: 'Lofi' },
+  { value: 'Rap', label: 'Rap' },
+  { value: 'Rock', label: 'Rock' },
+  { value: 'Indie Pop', label: 'Indie Pop' },
+  { value: 'Nigerian Pop', label: 'Nigerian Pop' },
 ];
 const style = {
   control: (base: {}) => ({

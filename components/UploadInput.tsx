@@ -1,13 +1,20 @@
 import { Icon } from '@iconify/react';
 import React, { useState } from 'react';
 import FileUploadBar from './FileUploadBar';
+import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
+import { setDoc } from 'firebase/firestore';
+import Image from 'next/image';
+interface Props {
+  getImage: (url: string) => void;
+}
 
-const UploadInput = ({ getFile }: { getFile: any }) => {
+const UploadInput = ({ getImage }: Props) => {
   const inputFileRef = React.useRef<HTMLInputElement | null>(null);
   const dragZoneRef = React.useRef<HTMLDivElement | null>(null);
   const [dragActive, setDragActive] = useState(false);
   const [showFileUploadBar, setShowFileUploadBar] = useState(false);
   const [filename, setFileName] = useState('');
+  const [image, setImage] = useState('');
   const handleDrag = (e: {
     preventDefault: () => void;
     stopPropagation: () => void;
@@ -38,10 +45,17 @@ const UploadInput = ({ getFile }: { getFile: any }) => {
   const onChange = (event: FileList | null) => {
     if (event === null) return;
     const file = event[0];
+    const storage = getStorage();
+    const storageRef = ref(storage, file.name);
 
+    uploadBytes(storageRef, file).then(async (snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        getImage(url);
+        setImage(url);
+      });
+    });
     setFileName(file?.name);
     setShowFileUploadBar(true);
-    getFile(file);
   };
   return (
     <div className="space-y-2">
@@ -54,23 +68,27 @@ const UploadInput = ({ getFile }: { getFile: any }) => {
         onDragEnter={handleDrag}
         className="relative flex items-center justify-center p-10 border border-dashed border-primary"
       >
-        <div className="flex flex-col items-center space-y-2">
-          <span className="mb-3 text-customgray600">
-            <Icon icon="akar-icons:image" width={40} />
-          </span>
-          <p className="text-sm font-medium text-center">
-            Drop album cover here, or
-            <span
-              className="pl-1 underline cursor-pointer"
-              onClick={getInputRef}
-            >
-              browse
+        {image ? (
+          <Image src={image} alt="album image" width={200} height={200} />
+        ) : (
+          <div className="flex flex-col items-center space-y-2">
+            <span className="mb-3 text-customgray600">
+              <Icon icon="akar-icons:image" width={40} />
             </span>
-          </p>
-          <p className="text-xs text-center text-customgray600">
-            Supports jpg and png only
-          </p>
-        </div>
+            <p className="text-sm font-medium text-center">
+              Drop album cover here, or
+              <span
+                className="pl-1 underline cursor-pointer"
+                onClick={getInputRef}
+              >
+                browse
+              </span>
+            </p>
+            <p className="text-xs text-center text-customgray600">
+              Supports jpg and png only
+            </p>
+          </div>
+        )}
 
         {dragActive && (
           <div

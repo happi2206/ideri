@@ -15,7 +15,12 @@ const Album = ({ image, title, artist }: Props) => {
       className="cursor-pointer"
     >
       <div className="cursor-pointer">
-        <Image src={image} alt={`the album cover of ${title}`} />
+        <Image
+          src={image}
+          alt={`the album cover of ${title}`}
+          width={400}
+          height={400}
+        />
 
         <div className="flex flex-col items-center">
           <h4 className="text-sm font-bold md:text-lg">{title}</h4>

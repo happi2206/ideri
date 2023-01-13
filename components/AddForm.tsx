@@ -4,13 +4,19 @@ import Button from './Base/Button';
 import Input from './Base/Input';
 import SelectInput from './Base/SelectInput';
 import UploadInput from './UploadInput';
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from '../firebase/config';
+import { useRouter } from 'next/router';
+import DialogBox from './DialogBox';
 
 const AddForm = () => {
-  const [buttonActive, setButtonActive] = useState(false);
+  const route = useRouter();
   const [albumTitle, setAlbumTitle] = useState('');
   const [artistName, setArtistName] = useState('');
   const [isValid, setValid] = useState(false);
-  const [file, setFile] = useState<any>();
+  const [image, setImage] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [isSuccessful, setIsSuccessful] = useState('');
   const [genres, setGenres] = useState<
     MultiValue<{
       value: string;
@@ -18,18 +24,39 @@ const AddForm = () => {
     }>
   >([]);
   const submitForm = () => {
-    setButtonActive(true);
+    event?.preventDefault();
+
+    try {
+      const value = doc(db, 'albums', albumTitle);
+      setSubmitting(true);
+      setDoc(value, {
+        albumTitle: albumTitle,
+        artistName: artistName,
+        genres: genres,
+        albumCover: image,
+      });
+
+      setTimeout(() => {
+        setIsSuccessful('success');
+        route.push('/');
+      }, 2500);
+    } catch (err) {
+      console.error(err);
+      setSubmitting(false);
+      setIsSuccessful('failed');
+    }
   };
 
   const validate = () => {
-    if (file) {
+    if (image) {
       return artistName.length && albumTitle.length && genres.length;
     }
   };
+
   useEffect(() => {
     const isValid = validate();
     setValid(!!isValid);
-  }, [artistName, albumTitle, genres, file]);
+  }, [artistName, albumTitle, genres, image]);
   return (
     <div className="flex justify-center">
       <form
@@ -47,11 +74,18 @@ const AddForm = () => {
           placeholder="Enter artist name"
         />
         <SelectInput label="Select Genres" onChange={(e) => setGenres(e)} />
-        <UploadInput getFile={(file: any) => setFile(file)} />
-        <Button full disabled={!isValid}>
+        <UploadInput getImage={(url) => setImage(url)} />
+        <Button
+          isSubmitting={submitting}
+          full
+          disabled={!isValid}
+          type="submit"
+        >
           Upload
         </Button>
       </form>
+
+      {isSuccessful !== '' && <DialogBox text={isSuccessful} />}
     </div>
   );
 };
