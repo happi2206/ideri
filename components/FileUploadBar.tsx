@@ -20,9 +20,9 @@ const FileUploadBar = ({ title }: { title: string }) => {
         <div className="flex items-center justify-between">
           <p className="text-xs font-medium">{title}</p>
 
-          <span className="text-red-500 cursor-pointer">
+          {/* <span className="text-red-500 cursor-pointer">
             <Icon icon="ep:delete" />
-          </span>
+          </span> */}
         </div>
       ) : (
         <div>

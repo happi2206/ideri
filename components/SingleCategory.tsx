@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface Props {
-  color: 'blue' | 'purple' | 'yellow' | 'teal' | 'pink' | 'beige';
+  color: 'blue' | 'purple' | 'yellow' | 'teal' | 'pink' | 'beige' | string;
   text: string;
 }
 const SingleCategory = ({ color, text }: Props) => {

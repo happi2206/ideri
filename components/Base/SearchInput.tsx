@@ -2,7 +2,12 @@ import React from 'react';
 import Button from './Button';
 import { Icon } from '@iconify/react';
 import Categories from '../Categories';
+import { useAlbumContext } from '../../context/AlbumContext';
+
 const SearchInput = () => {
+  const { reload, reloadprev } = useAlbumContext();
+
+  console.log(reload);
   return (
     <div className="py-8 md:py-10 ">
       <div className="">

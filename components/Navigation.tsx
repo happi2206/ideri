@@ -10,12 +10,16 @@ const Navigation = () => {
       <div className="container flex items-center">
         <div className="flex items-center grow">
           <Link href="/">
-            <p className="font-bold cursor-pointer md:text-2xl">IDERI</p>
+            <p className="text-xs font-bold cursor-pointer sm:text-base md:text-2xl">
+              IDERI
+            </p>
           </Link>
         </div>
         <div className="sp">
-          <div className="flex items-center space-x-10">
-            <p className="text-sm md:text-base">About</p>
+          <div className="flex items-center space-x-4 sm:space-x-10">
+            <p className="text-xs sm:text-sm md:text-base">
+              Now what&apos;s this about?
+            </p>
             <Button
               onClick={() => route.push('/uploadalbum')}
               disabled={route.route === '/uploadalbum'}

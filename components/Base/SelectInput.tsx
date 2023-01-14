@@ -14,12 +14,12 @@ interface Props {
   ) => void;
 }
 const options = [
-  { value: 'Pop', label: 'Pop' },
-  { value: 'Lofi', label: 'Lofi' },
-  { value: 'Rap', label: 'Rap' },
-  { value: 'Rock', label: 'Rock' },
-  { value: 'Indie Pop', label: 'Indie Pop' },
-  { value: 'Nigerian Pop', label: 'Nigerian Pop' },
+  { label: 'Abstract', value: 'blue' },
+  { label: 'Experimental', value: 'purple' },
+  { label: 'Photography', value: 'yellow' },
+  { label: 'Ethereal', value: 'teal' },
+  { label: 'Futuristic', value: 'pink' },
+  { label: 'Minimalistic', value: 'beige' },
 ];
 const style = {
   control: (base: {}) => ({
