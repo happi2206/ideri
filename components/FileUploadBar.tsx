@@ -11,7 +11,7 @@ const FileUploadBar = ({ title }: { title: string }) => {
         if (progress === 100) setShowCoverTitle(true);
       }
     };
-    const timer = setTimeout(() => incrementCount(), 60);
+    const timer = setTimeout(() => incrementCount(), 100);
     return () => clearTimeout(timer);
   }, [progress]);
   return (

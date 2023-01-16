@@ -10,8 +10,12 @@ const AlbumDetail = () => {
   const [data, setData] = useState<DocumentData>();
 
   const getAlbumDetail = async () => {
+    console.log(query);
     if (query.AlbumDetail && typeof query.AlbumDetail === 'string') {
-      let album = query.AlbumDetail.split('-')[0];
+      let album;
+      if (query.AlbumDetail.includes('-')) {
+        album = query.AlbumDetail.split('-')[0];
+      } else album = query.AlbumDetail;
       const docRef = doc(db, 'albums', `${album}`);
       const docSnap = await getDoc(docRef);
       setData(docSnap.data());
@@ -21,7 +25,7 @@ const AlbumDetail = () => {
     getAlbumDetail();
   }, []);
   return (
-    <div className="bg-red-100 text-lighttext">
+    <div className="min-h-screen bg-red-100 text-lighttex">
       {data && (
         <div className="container p-10">
           <div className="flex justify-between">
@@ -39,7 +43,7 @@ const AlbumDetail = () => {
             </div>
           </div>
 
-          <div className="flex pt-10 space-x-10">
+          <div className="flex flex-col pt-10 sm:space-x-10 sm:flex-row">
             <div className="">
               <Image src={data.albumCover} alt="/" width={695} height={605} />
             </div>
@@ -47,14 +51,18 @@ const AlbumDetail = () => {
               <p className="underline cursor-pointer">Spotify link</p>
 
               <div className="md:pt-20">
-                <h2 className="font-bold md:text-4xl ">{data.albumTitle}</h2>
-                <p className="py-3 text-lg font-light">{data.artistName}</p>
+                <h2 className="font-bold capitalize md:text-4xl ">
+                  {data.albumTitle}
+                </h2>
+                <p className="py-3 text-lg font-light capitalize">
+                  {data.artistName}
+                </p>
               </div>
 
               <div>
                 <p className="py-3 text-base font-bold">Album cover genre</p>
 
-                <div className="space-x-3">
+                <div className="pt-4 sspace-x-3">
                   {data.genres.map(
                     (
                       genre: { label: string; value: string },

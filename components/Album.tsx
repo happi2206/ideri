@@ -23,8 +23,8 @@ const Album = ({ image, title, artist }: Props) => {
         />
 
         <div className="flex flex-col items-center">
-          <h4 className="text-sm font-bold md:text-lg">{title}</h4>
-          <p className="text-xs font-light text-gray-400 md:text-base">
+          <h4 className="text-sm font-bold capitalize md:text-lg">{title}</h4>
+          <p className="text-xs font-light text-gray-400 capitalize md:text-base">
             {artist}
           </p>
         </div>

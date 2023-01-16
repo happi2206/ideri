@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from './Button';
 import { Icon } from '@iconify/react';
 import Categories from '../Categories';
 import { useAlbumContext } from '../../context/AlbumContext';
 
 const SearchInput = () => {
-  const { reload, reloadprev } = useAlbumContext();
+  const { setFilterValue, setCategoryValue } = useAlbumContext();
 
-  console.log(reload);
+  const [searchInput, setSearchInput] = useState('');
+
+  const submitSearch = () => {
+    setFilterValue(searchInput.toLowerCase());
+    setCategoryValue('');
+  };
   return (
     <div className="py-8 md:py-10 ">
       <div className="">
@@ -24,17 +29,31 @@ const SearchInput = () => {
       <p className="mt-10 uppercase boldparagraph">
         Search for album and single covers
       </p>
-      <div className=" text-gray-200 flex justify-between max-w-[600px] w-full space-x-3  pt-3 ">
+      <div className=" text-gray-200 flex justify-between sm:max-w-[600px] w-full space-x-3  pt-3 ">
         <div className=" space-x-3 flex h-12 items-center justify-between w-full px-2  md:text-base text-gray-400 bg-[#DADADA]  border border-[#A4A3A3]">
           <Icon icon="akar-icons:search" />
           <input
             type="text"
             placeholder="Search"
+            value={searchInput}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                submitSearch();
+              }
+            }}
+            onChange={(e) => setSearchInput(e.target.value)}
             className="w-full bg-[#DADADA] focus:outline-none"
           />
         </div>
 
-        <Button isSearch>Search</Button>
+        <Button
+          isSearch
+          onClick={() => {
+            submitSearch();
+          }}
+        >
+          Search
+        </Button>
       </div>
     </div>
   );

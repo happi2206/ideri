@@ -22,11 +22,11 @@ const Button = ({
 }: Props) => {
   return (
     <button
-      className={`${isSearch ? 'px-12 py-3' : 'p-4'} ${
+      className={`${isSearch ? 'px-12 py-3' : 'p-3 sm:p-4'} ${
         disabled ? 'bg-customgray200 cursor-not-allowed' : 'bg-dark'
       } ${
         full && 'w-full'
-      } font-bold flex items-center justify-center text-center md:text-base text-sm text-light hover:opacity-80`}
+      } font-bold flex items-center justify-center text-center md:text-base text-xs sm:text-sm text-light hover:opacity-80`}
       onClick={onClick}
       disabled={disabled || isSubmitting}
       type={type}

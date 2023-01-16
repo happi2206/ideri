@@ -27,11 +27,11 @@ const AddForm = () => {
     event?.preventDefault();
 
     try {
-      const value = doc(db, 'albums', albumTitle);
+      const value = doc(db, 'albums', albumTitle.toLowerCase());
       setSubmitting(true);
       setDoc(value, {
-        albumTitle: albumTitle,
-        artistName: artistName,
+        albumTitle: albumTitle.toLowerCase(),
+        artistName: artistName.toLowerCase(),
         genres: genres,
         albumCover: image,
       });
