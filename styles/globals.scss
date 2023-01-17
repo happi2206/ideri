@@ -39,6 +39,9 @@ body {
   &.beige {
     @apply bg-[#F5F3F2] border-[#eddbd2];
   }
+  &.red {
+    @apply bg-[#edebf7] border-[#dad6f1];
+  }
 }
 
 .no-scrollbar::-webkit-scrollbar {

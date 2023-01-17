@@ -48,6 +48,7 @@ const Home: NextPage = () => {
       console.error(err);
     }
   };
+
   useEffect(() => {
     fetchAlbums();
   }, [reFresh]);
