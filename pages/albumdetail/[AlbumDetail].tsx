@@ -15,6 +15,8 @@ const AlbumDetail = () => {
   const [spotifyLink, setSpotifyLink] = useState('');
   const [fetching, setFetching] = useState(false);
   const { setCategoryValue } = useAlbumContext();
+  const [albumColor, setAlbumColor] = useState('');
+  const [colorMode, setColorMode] = useState(false);
 
   const getAlbumDetail = async () => {
     setFetching(true);
@@ -34,18 +36,33 @@ const AlbumDetail = () => {
         if (spotifyDetails.albums?.items[0]?.data?.uri)
           setSpotifyLink(spotifyDetails.albums.items[0]?.data?.uri);
         setFetching(false);
+        getRandomColor();
       }
     } catch (err) {
       console.error(err);
       setFetching(false);
     }
   };
+
+  const getRandomColor = () => {
+    if (data) {
+      let randomIndex = Math.floor(Math.random() * data.colors.length);
+      let randomItem = data.colors[randomIndex];
+      setAlbumColor(randomItem);
+    }
+  };
   useEffect(() => {
     getAlbumDetail();
   }, []);
+  useEffect(() => {
+    getRandomColor();
+  }, [colorMode]);
   return (
     <>
-      <div className="min-h-screen bg-red-100 text-lighttex">
+      <div
+        className={`min-h-screen  text-lighttext`}
+        style={{ background: albumColor ? albumColor : 'bg-red-100' }}
+      >
         {fetching ? (
           <div className="h-[70vh] flex justify-center items-center">
             <Loader />
@@ -62,7 +79,10 @@ const AlbumDetail = () => {
                   <p> Back</p>
                 </div>
                 <div>
-                  <span className="px-4 text-[10px] py-1 border border-black rounded-xl">
+                  <span
+                    onClick={() => setColorMode(!colorMode)}
+                    className="cursor-pointer px-4 text-[10px] py-1 border border-black rounded-xl"
+                  >
                     Dark
                   </span>
                 </div>
@@ -113,6 +133,22 @@ const AlbumDetail = () => {
                           />
                         )
                       )}
+                    </div>
+                  </div>
+
+                  <div className="pt-4">
+                    <p className="py-3 text-base font-bold">
+                      Album cover palette
+                    </p>
+
+                    <div className="flex items-center border border-gray-600 w-fit">
+                      {data.colors.map((color: string, index: React.Key) => (
+                        <span
+                          className={`bg-[${color}] p-5`}
+                          style={{ background: color }}
+                          key={index}
+                        ></span>
+                      ))}
                     </div>
                   </div>
                 </div>

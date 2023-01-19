@@ -8,7 +8,7 @@ import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import { useRouter } from 'next/router';
 import DialogBox from './DialogBox';
-
+import { ColorExtractor } from 'react-color-extractor';
 const AddForm = () => {
   const route = useRouter();
   const [albumTitle, setAlbumTitle] = useState('');
@@ -17,6 +17,7 @@ const AddForm = () => {
   const [image, setImage] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [isSuccessful, setIsSuccessful] = useState('');
+  const [colors, setColors] = useState<string[]>([]);
   const [genres, setGenres] = useState<
     MultiValue<{
       value: string;
@@ -34,6 +35,7 @@ const AddForm = () => {
         artistName: artistName.toLowerCase(),
         genres: genres,
         albumCover: image,
+        colors: colors,
       });
 
       setTimeout(() => {
@@ -63,6 +65,7 @@ const AddForm = () => {
         onSubmit={submitForm}
         className="w-full space-y-8 md:w-8/12 lg:w-6/12"
       >
+        {JSON.stringify(colors)}
         <Input
           onChange={(e) => setAlbumTitle(e.target.value)}
           label="Album Title"
@@ -75,6 +78,15 @@ const AddForm = () => {
         />
         <SelectInput label="Select Genres" onChange={(e) => setGenres(e)} />
         <UploadInput getImage={(url) => setImage(url)} />
+        {image && (
+          <ColorExtractor
+            src={image}
+            getColors={(colors: any) => {
+              console.log('old colors', colors);
+              setColors(colors);
+            }}
+          />
+        )}
         <Button
           isSubmitting={submitting}
           full

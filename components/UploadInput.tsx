@@ -2,19 +2,21 @@ import { Icon } from '@iconify/react';
 import React, { useState } from 'react';
 import FileUploadBar from './FileUploadBar';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
-import { setDoc } from 'firebase/firestore';
 import Image from 'next/image';
+
 interface Props {
   getImage: (url: string) => void;
+  getNewColors?: (colors: string[]) => void;
 }
 
-const UploadInput = ({ getImage }: Props) => {
+const UploadInput = ({ getImage, getNewColors }: Props) => {
   const inputFileRef = React.useRef<HTMLInputElement | null>(null);
   const dragZoneRef = React.useRef<HTMLDivElement | null>(null);
   const [dragActive, setDragActive] = useState(false);
   const [showFileUploadBar, setShowFileUploadBar] = useState(false);
   const [filename, setFileName] = useState('');
   const [image, setImage] = useState('');
+  const [colors, setColors] = useState([]);
   const handleDrag = (e: {
     preventDefault: () => void;
     stopPropagation: () => void;
@@ -54,6 +56,7 @@ const UploadInput = ({ getImage }: Props) => {
         setImage(url);
       });
     });
+
     setFileName(file?.name);
     setShowFileUploadBar(true);
   };

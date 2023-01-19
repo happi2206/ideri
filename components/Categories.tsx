@@ -41,7 +41,7 @@ const Categories = () => {
       {categoryValue !== '' && (
         <span
           onClick={() => setCategoryValue('')}
-          className="pl-1 text-lg font-black cursor-pointer genrespan red"
+          className="pl-1 text-lg font-black cursor-pointer genrespan opacity-80 red"
         >
           All
         </span>
