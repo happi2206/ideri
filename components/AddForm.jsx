@@ -17,13 +17,8 @@ const AddForm = () => {
   const [image, setImage] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [isSuccessful, setIsSuccessful] = useState('');
-  const [colors, setColors] = useState<string[]>([]);
-  const [genres, setGenres] = useState<
-    MultiValue<{
-      value: string;
-      label: string;
-    }>
-  >([]);
+  const [colors, setColors] = useState([]);
+  const [genres, setGenres] = useState([]);
   const submitForm = () => {
     event?.preventDefault();
 
@@ -65,7 +60,6 @@ const AddForm = () => {
         onSubmit={submitForm}
         className="w-full space-y-8 md:w-8/12 lg:w-6/12"
       >
-        {JSON.stringify(colors)}
         <Input
           onChange={(e) => setAlbumTitle(e.target.value)}
           label="Album Title"
@@ -81,8 +75,7 @@ const AddForm = () => {
         {image && (
           <ColorExtractor
             src={image}
-            getColors={(colors: any) => {
-              console.log('old colors', colors);
+            getColors={(colors) => {
               setColors(colors);
             }}
           />
