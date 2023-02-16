@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { MultiValue } from 'react-select';
 import Button from './Base/Button';
 import Input from './Base/Input';
 import SelectInput from './Base/SelectInput';
