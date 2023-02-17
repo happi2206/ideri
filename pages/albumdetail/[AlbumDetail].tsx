@@ -60,7 +60,7 @@ const AlbumDetail = () => {
   return (
     <>
       <div
-        className={`min-h-screen  text-lighttext`}
+        className={`min-h-screen  text-lighttext page`}
         style={{ background: albumColor ? albumColor : 'bg-red-100' }}
       >
         {fetching ? (

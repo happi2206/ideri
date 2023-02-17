@@ -53,7 +53,7 @@ const Home: NextPage = () => {
     fetchAlbums();
   }, [reFresh]);
   return (
-    <div className="container">
+    <div className="container page">
       <Filter />
       {fetching ? (
         <div className="h-[50vh] flex justify-center items-center">

@@ -4,24 +4,17 @@ import DefaultLayout from '../layouts/DefaultLayout';
 import { AlbumContextProvider } from '../context/AlbumContext';
 import { useState, useEffect } from 'react';
 import { SplashScreen } from '../components/SplashScreen';
-
+import { AnimatePresence } from 'framer-motion';
 function MyApp({ Component, pageProps }: AppProps) {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setLoading(false);
-  }, []);
-
-  if (loading) {
-    return <SplashScreen />;
-  }
-
   return (
-    <DefaultLayout>
-      <AlbumContextProvider>
-        <Component {...pageProps} />
-      </AlbumContextProvider>
-    </DefaultLayout>
+    <AnimatePresence exitBeforeEnter>
+      <DefaultLayout>
+        <AlbumContextProvider>
+          <SplashScreen />
+          <Component {...pageProps} />
+        </AlbumContextProvider>
+      </DefaultLayout>
+    </AnimatePresence>
   );
 }
 
