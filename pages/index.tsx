@@ -7,51 +7,11 @@ import { db } from '../firebase/config';
 import { useAlbumContext } from '../context/AlbumContext';
 import Loader from '../components/Loader';
 import EmptyState from '../components/EmptyState';
+import Pagination from '../components/Pagination';
 
 const Home: NextPage = () => {
-  const { reFresh, filterValue, categoryValue } = useAlbumContext();
-  const [albums, setAlbums] = useState<DocumentData[]>([]);
-  const [fetching, setFetching] = useState(false);
-  const temp: SetStateAction<DocumentData[]> = [];
-  const handleFiltering = (query: string) => {
-    const searchResults = temp.filter((item) => {
-      if (query === 'albumTitle') {
-        return item[query].includes(filterValue);
-      } else if (query === 'genres') {
-        return item.genres.some(
-          (innerItem: { label: string }) => innerItem.label === categoryValue
-        );
-      }
-    });
-    setAlbums(searchResults);
-  };
+  const { paginatedData, fetching, albums } = useAlbumContext();
 
-  const fetchAlbums = async () => {
-    setFetching(true);
-    try {
-      const querySnapshot = await getDocs(collection(db, 'albums'));
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        temp.push(data);
-        setAlbums(temp);
-        if (filterValue !== '') {
-          handleFiltering('albumTitle');
-        }
-        if (categoryValue !== '') {
-          handleFiltering('genres');
-        }
-      });
-
-      setFetching(false);
-    } catch (err) {
-      setFetching(false);
-      console.error(err);
-    }
-  };
-
-  useEffect(() => {
-    fetchAlbums();
-  }, [reFresh]);
   return (
     <div className="container page">
       <Filter />
@@ -59,8 +19,13 @@ const Home: NextPage = () => {
         <div className="h-[50vh] flex justify-center items-center">
           <Loader />
         </div>
-      ) : albums.length > 0 ? (
-        <AlbumList albums={albums} />
+      ) : paginatedData.length > 0 ? (
+        <>
+          <AlbumList albums={paginatedData} />
+          <div className="py-20 mb-20">
+            <Pagination />
+          </div>
+        </>
       ) : (
         <EmptyState />
       )}

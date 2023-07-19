@@ -73,10 +73,10 @@ body {
 
 .paginationlist {
   ul {
-    @apply flex items-center w-full;
+    @apply flex items-center w-full transition duration-300;
 
     li {
-      &:not(:first-child):not(:last-child) {
+      &:not(.arrow):not(.arrow) {
         @apply mx-2;
       }
       @apply flex items-center justify-center md:w-16 px-3 py-1.5 md:py-2 ml-0 bg-transparent border border-gray-700 rounded-sm cursor-pointer md:h-14 hover:bg-gray-100;

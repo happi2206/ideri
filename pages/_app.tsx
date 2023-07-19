@@ -4,17 +4,29 @@ import DefaultLayout from '../layouts/DefaultLayout';
 import { AlbumContextProvider } from '../context/AlbumContext';
 import { useState, useEffect } from 'react';
 import { SplashScreen } from '../components/SplashScreen';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 function MyApp({ Component, pageProps }: AppProps) {
+  const [showSplashScreen, setShowSplashScreen] = useState(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowSplashScreen(false);
+    }, 3500);
+
+    return () => clearTimeout(timeout);
+  }, []);
   return (
-    <AnimatePresence exitBeforeEnter>
-      <DefaultLayout>
-        <AlbumContextProvider>
-          <SplashScreen />
-          <Component {...pageProps} />
-        </AlbumContextProvider>
-      </DefaultLayout>
-    </AnimatePresence>
+    <>
+      {showSplashScreen ? (
+        <SplashScreen />
+      ) : (
+        <DefaultLayout>
+          <AlbumContextProvider>
+            <Component {...pageProps} />
+          </AlbumContextProvider>
+        </DefaultLayout>
+      )}
+    </>
   );
 }
 

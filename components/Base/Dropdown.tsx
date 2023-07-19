@@ -2,11 +2,18 @@ import { Icon } from '@iconify/react';
 import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 
 interface Props {
-  values: string[];
-  getValue: (value: string) => void;
+  values: string[] | number[];
+  getValue: (value: string | number) => void;
+  text?: string;
+  currentValue?: string | number;
 }
 
-const Dropdown = ({ values, getValue }: Props) => {
+const Dropdown = ({
+  currentValue,
+  values,
+  getValue,
+  text = 'Sort by:',
+}: Props) => {
   const [dropdown, setDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
@@ -27,7 +34,7 @@ const Dropdown = ({ values, getValue }: Props) => {
   };
   return (
     <div className="flex items-center space-x-3">
-      <p className="text-sm">Sort by:</p>
+      <p className="text-sm">{text}</p>
       <div className="relative " ref={dropdownRef}>
         <div
           onClick={() => {
@@ -35,7 +42,7 @@ const Dropdown = ({ values, getValue }: Props) => {
           }}
           className={`w-40 text-gray-500 text-xs justify-between bg-light py-2 md:py-4 px-3 md:px-5 capitalize cursor-pointer border-gray-300 border  text-center inline-flex items-center space-x-3`}
         >
-          <span>{values[0]}</span>
+          <span>{currentValue || values[0]}</span>
           <span>
             <Icon icon={`akar-icons:chevron-${dropdown ? 'up' : 'down'}`} />
           </span>
@@ -47,7 +54,7 @@ const Dropdown = ({ values, getValue }: Props) => {
             className="absolute z-10 w-40 border rounded shadow-lg border-primary bg-light md:w-44"
           >
             <ul className="text-sm text-gray-700 ">
-              {values.map((value: string, i: React.Key) => (
+              {values.map((value: string | number, i: React.Key) => (
                 <div key={i}>
                   <li
                     className="p-3 text-xs capitalize rounded cursor-pointer hover:bg-gray-200 "

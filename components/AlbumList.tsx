@@ -29,10 +29,6 @@ const AlbumList = ({ albums }: Props) => {
           />
         ))}
       </div>
-
-      <div className="pb-20 pt-14">
-        <Pagination />
-      </div>
     </>
   );
 };
