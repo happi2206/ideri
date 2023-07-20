@@ -19,12 +19,12 @@ const Pagination = () => {
     <div className="flex justify-center w-full paginationlist">
       <nav>
         <ul>
+          {/* {currentPage} total:{totalPages} */}
           {currentPage > 1 && (
             <li onClick={handlePrevPage} className="arrow">
               <Icon icon="akar-icons:chevron-left" />
             </li>
           )}
-
           {numbersArray.map((number, index) => (
             <li
               key={index}

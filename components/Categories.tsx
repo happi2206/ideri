@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SingleCategory from './SingleCategory';
 import { useAlbumContext } from '../context/AlbumContext';
 
 const Categories = () => {
-  const { categoryValue, setCategoryValue, setFilterValue } = useAlbumContext();
+  const { categoryValue, setCategoryValue, setFilterValue, albums } =
+    useAlbumContext();
 
   const setCategory = (value: string) => {
     setCategoryValue(value);
@@ -36,6 +37,7 @@ const Categories = () => {
       color: 'beige',
     },
   ];
+
   return (
     <div className="w-full h-full py-5 space-x-5 overflow-x-scroll md:py-10 no-scrollbar">
       {categoryValue !== '' && (

@@ -21,7 +21,7 @@ export const SplashScreen = () => {
       <div className="fixed overflow-hidden top-0 flex items-center justify-center w-screen h-screen bg-[#232323] z-20">
         <h1 className="font-bold text-white text-8xl">IDERI</h1>
 
-        <div className="absolute z-[999] top-40 left-20">
+        <div className="absolute z-[999] top-10 md:top-40 left-0 md:left-20">
           <Image src={splash1} alt="" className="" />
         </div>
 
@@ -31,10 +31,10 @@ export const SplashScreen = () => {
         <div className="absolute z-[999] bottom-20 right-96">
           <Image src={splash3} alt="" className="absolute" />
         </div>
-        <div className="absolute z-[999] right-40 top-20">
+        <div className="absolute z-[999] -right-12 md:right-40 top-20">
           <Image src={splash4} alt="" className="absolute" />
         </div>
-        <div className="absolute z-[999]  top-20">
+        <div className="absolute z-[999] -left-4 md:left-96  md:top-20">
           <Image src={splash5} alt="" className="absolute" />
         </div>
       </div>

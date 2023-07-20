@@ -4,17 +4,24 @@ import SearchInput from './Base/SearchInput';
 import { useAlbumContext } from '../context/AlbumContext';
 
 const Filter = () => {
-  const { setItemsPerPage } = useAlbumContext();
+  const { setItemsPerPage, setSortBy } = useAlbumContext();
   const [perPageValue, setPerPageValue] = useState(10);
+  const [currentFilterValue, setCurrentFilterValue] = useState('');
   return (
     <>
       <SearchInput />
 
       <div className="flex flex-col items-end gap-5 py-4 sm:flex-row sm:justify-end md:py-8">
-        <Dropdown
+        {/* <Dropdown
+          currentValue={currentFilterValue}
           values={['Title', 'Artist']}
-          getValue={() => console.log('object')}
-        />
+          getValue={(value) => {
+            if (typeof value !== 'number') {
+              setCurrentFilterValue(value);
+              setSortBy(value);
+            }
+          }}
+        /> */}
         <Dropdown
           currentValue={perPageValue}
           values={[2, 5, 10]}

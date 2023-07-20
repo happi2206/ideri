@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import image from './../assets/images/Rectangle.png';
+
 import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
 import { motion } from 'framer-motion';
@@ -19,7 +22,19 @@ const DefaultLayout = ({ children }: Props) => {
     >
       <Navigation />
 
-      <div className="relative top-20 h-96">{children}</div>
+      <div className="pb-56 ">
+        <>
+          <div className="fixed top-0 bottom-0 left-0 right-0 z-0 w-full h-full">
+            <Image
+              src={image}
+              alt="background hash "
+              className="object-cover"
+            />
+          </div>
+
+          <div className="relative z-20">{children}</div>
+        </>
+      </div>
       <Footer />
     </motion.div>
   );

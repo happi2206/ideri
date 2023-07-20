@@ -3,11 +3,14 @@ import Button from './Button';
 import { Icon } from '@iconify/react';
 import Categories from '../Categories';
 import { useAlbumContext } from '../../context/AlbumContext';
+import ColorCategories from '../ColorCategories';
+import Dropdown from './Dropdown';
 
 const SearchInput = () => {
   const { setFilterValue, setCategoryValue } = useAlbumContext();
 
   const [searchInput, setSearchInput] = useState('');
+  const [currentValue, setCurrentValue] = useState('Music genres');
 
   const submitSearch = () => {
     setFilterValue(searchInput.toLowerCase());
@@ -17,12 +20,17 @@ const SearchInput = () => {
     <div className="py-8 md:py-10 ">
       <div className="">
         <p className="mb-3 text-sm text-customgray800">Categories</p>
-        <p className="flex items-center space-x-2 uppercase cursor-pointer boldparagraph">
-          <span>Music genres</span>
-          <Icon icon={`akar-icons:chevron-up`} />
-        </p>
 
-        <Categories />
+        <Dropdown
+          values={['Music genres', 'Color']}
+          isPlain
+          currentValue={currentValue}
+          getValue={(value) => {
+            if (typeof value === 'string') setCurrentValue(value);
+          }}
+        />
+
+        {currentValue === 'Music genres' ? <Categories /> : <ColorCategories />}
       </div>
 
       <div className="pt-4 border-b border-gray-300 "></div>

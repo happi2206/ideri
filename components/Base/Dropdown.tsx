@@ -6,12 +6,14 @@ interface Props {
   getValue: (value: string | number) => void;
   text?: string;
   currentValue?: string | number;
+  isPlain?: boolean;
 }
 
 const Dropdown = ({
   currentValue,
   values,
   getValue,
+  isPlain,
   text = 'Sort by:',
 }: Props) => {
   const [dropdown, setDropdown] = useState(false);
@@ -34,13 +36,17 @@ const Dropdown = ({
   };
   return (
     <div className="flex items-center space-x-3">
-      <p className="text-sm">{text}</p>
+      {!isPlain && <p className="text-sm">{text}</p>}
       <div className="relative " ref={dropdownRef}>
         <div
           onClick={() => {
             setDropdown(!dropdown);
           }}
-          className={`w-40 text-gray-500 text-xs justify-between bg-light py-2 md:py-4 px-3 md:px-5 capitalize cursor-pointer border-gray-300 border  text-center inline-flex items-center space-x-3`}
+          className={`w-40 text-xs justify-between ${
+            isPlain
+              ? 'uppercase boldparagraph'
+              : 'bg-light capitalize text-gray-500 border-gray-300 border px-3 md:px-5'
+          } py-2 md:py-4 cursor-pointer text-center inline-flex items-center space-x-3`}
         >
           <span>{currentValue || values[0]}</span>
           <span>
